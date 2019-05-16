@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atguigu.mybatis314.test3.classes">
+    <select id="getClasses" parameterType="int" resultMap="getClassesResultMap">
+        select * from mybatis_class c,mybatis_teacher t where c.teacher_id = t.t_id and c.c_id=#{id}
+    </select>
+    <resultMap id="getClassesResultMap" type="com.atguigu.mybatis314.entity.Classes">
+        <id property="id" column="c_id"/>
+        <result property="name" column="c_name"/>
+        <association property="teacher" column="teacher_id" javaType="com.atguigu.mybatis314.entity.Teacher">
+            <id property="id" column="t_id"/>
+            <result property="name" column="t_name"/>
+        </association>
+    </resultMap>
+
+    <select id="getClasses2" parameterType="int" resultMap="getClassesResultMap2">
+        select * FROM  mybatis_class c where c.c_id=#{id}
+    </select>
+    <resultMap id="getClassesResultMap2" type="_Classes">
+        <id property="id" column="c_id"/>
+        <result property="name" column="c_name"/>
+        <association property="teacher" column="teacher_id" select="selectTeacher">
+
+        </association>
+    </resultMap>
+    <select id="selectTeacher" parameterType="int" resultMap="getTeacher">
+        select * from mybatis_teacher t where t.t_id=#{id1}
+    </select>
+    <resultMap id="getTeacher" type="_Teacher">
+        <id property="id" column="t_id"/>
+        <result property="name" column="t_name"/>
+    </resultMap>
+</mapper>

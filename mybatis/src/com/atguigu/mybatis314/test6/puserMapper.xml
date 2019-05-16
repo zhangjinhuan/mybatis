@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atguigu.mybatis314.test6.puserMapper">
+    <select id="getCountsex" statementType="CALLABLE" parameterMap="getCountsexMap">
+        call cqqxcs.get_usersex_count(?,?)
+    </select>
+    <parameterMap id="getCountsexMap" type="java.util.Map">
+        <parameter property="sex_id1" mode="IN" jdbcType="INTEGER"/>
+        <parameter property="user_count" mode="OUT" jdbcType="INTEGER"/>
+    </parameterMap>
+</mapper>
